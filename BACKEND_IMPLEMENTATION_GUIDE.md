@@ -523,9 +523,7 @@ cat tickets.csv
 ## 📝 Environment Variables Reference
 
 ```bash
-# Database
-MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/sla-tracker
-
+# 
 # Server
 PORT=5000                           # Railway assigns automatically
 NODE_ENV=production
