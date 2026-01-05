@@ -1,7 +1,7 @@
 import { Schema, model, Document } from 'mongoose';
 
 export interface ITicket extends Document {
-  _id: string;
+  _id: Schema.Types.ObjectId;
   teamId: Schema.Types.ObjectId;
   ticketNumber: string;
   title: string;

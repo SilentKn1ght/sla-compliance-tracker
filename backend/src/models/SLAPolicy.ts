@@ -1,7 +1,7 @@
 import { Schema, model, Document } from 'mongoose';
 
 export interface ISLAPolicy extends Document {
-  _id: string;
+  _id: Schema.Types.ObjectId;
   teamId: Schema.Types.ObjectId;
   name: string;
   p1ResponseTime: number; // hours

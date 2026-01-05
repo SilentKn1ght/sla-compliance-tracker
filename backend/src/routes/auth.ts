@@ -1,6 +1,6 @@
 import { Router, Response } from 'express';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions, Secret } from 'jsonwebtoken';
 import { Team } from '../models/Team';
 import { SLAPolicy } from '../models/SLAPolicy';
 import { EmailService } from '../services/emailService';
@@ -91,10 +91,14 @@ router.post('/register', async (req: RegisterRequest, res: Response) => {
     await team.save();
 
     // Generate JWT token
+    const jwtSecret = (process.env.JWT_SECRET || 'your-secret-key') as Secret;
+    const signOptions: SignOptions = {
+      expiresIn: (process.env.JWT_EXPIRY || '24h') as SignOptions['expiresIn']
+    };
     const token = jwt.sign(
-      { teamId: team._id, email: team.email },
-      process.env.JWT_SECRET || 'your-secret-key',
-      { expiresIn: process.env.JWT_EXPIRY || '24h' }
+      { teamId: team._id.toString(), email: team.email },
+      jwtSecret,
+      signOptions
     );
 
     // Send welcome email
@@ -149,10 +153,14 @@ router.post('/login', async (req: LoginRequest, res: Response) => {
     }
 
     // Generate JWT token
+    const jwtSecret = (process.env.JWT_SECRET || 'your-secret-key') as Secret;
+    const signOptions: SignOptions = {
+      expiresIn: (process.env.JWT_EXPIRY || '24h') as SignOptions['expiresIn']
+    };
     const token = jwt.sign(
-      { teamId: team._id, email: team.email },
-      process.env.JWT_SECRET || 'your-secret-key',
-      { expiresIn: process.env.JWT_EXPIRY || '24h' }
+      { teamId: team._id.toString(), email: team.email },
+      jwtSecret,
+      signOptions
     );
 
     res.json({

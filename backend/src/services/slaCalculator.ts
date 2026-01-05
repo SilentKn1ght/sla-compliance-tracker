@@ -187,7 +187,7 @@ export class SLACalculator {
       })
       .sort((a, b) => b.percentageElapsed - a.percentageElapsed);
 
-    return atRiskTickets;
+    return atRiskTickets as Array<ITicket & { percentageElapsed: number }>;
   }
 
   /**

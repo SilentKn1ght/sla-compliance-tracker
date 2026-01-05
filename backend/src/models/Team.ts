@@ -1,7 +1,7 @@
 import { Schema, model, Document } from 'mongoose';
 
 export interface ITeam extends Document {
-  _id: string;
+  _id: Schema.Types.ObjectId;
   name: string;
   email: string;
   members: Array<{
