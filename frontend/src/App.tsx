@@ -5,6 +5,7 @@ import Tickets from './pages/Tickets'
 import Analytics from './pages/Analytics'
 import Reports from './pages/Reports'
 import Settings from './pages/Settings'
+import Login from './pages/Login'
 
 function App() {
   const token = localStorage.getItem('token')
@@ -16,10 +17,11 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
-        <Navigation />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {token && <Navigation />}
+        <main className={token ? "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" : ""}>
           <Routes>
-            <Route path="/" element={<ProtectedRoute element={<Dashboard />} />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={token ? <ProtectedRoute element={<Dashboard />} /> : <Navigate to="/login" replace />} />
             <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
             <Route path="/tickets" element={<ProtectedRoute element={<Tickets />} />} />
             <Route path="/analytics" element={<ProtectedRoute element={<Analytics />} />} />

@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 import type { Ticket, SLAMetrics, SLAPolicy, DailyMetric } from '../types'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
+export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
 
 const api: AxiosInstance = axios.create({
   baseURL: API_URL,
