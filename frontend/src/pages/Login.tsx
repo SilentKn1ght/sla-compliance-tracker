@@ -36,7 +36,8 @@ export default function Login() {
       }
 
       localStorage.setItem('token', data.token)
-      navigate('/dashboard')
+      window.dispatchEvent(new Event('storage'))
+      window.location.href = '/dashboard'
     } catch (err) {
       setError('An error occurred. Please try again.')
     } finally {

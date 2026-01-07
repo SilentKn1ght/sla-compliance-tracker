@@ -33,3 +33,4 @@ logs/
 # Coverage
 coverage/
 .nyc_output/
+backend/scripts/seed.js

@@ -38,7 +38,7 @@ export class SLACalculator {
     const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
 
     const tickets = await Ticket.find({
-      teamId: new Schema.Types.ObjectId(teamId),
+      teamId: teamId,
       createdAt: { $gte: currentMonth, $lt: nextMonth }
     });
 
@@ -68,7 +68,7 @@ export class SLACalculator {
     const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
 
     const resolvedTickets = await Ticket.find({
-      teamId: new Schema.Types.ObjectId(teamId),
+      teamId: teamId,
       status: { $in: ['resolved', 'closed'] },
       resolvedAt: { $gte: currentMonth, $lt: nextMonth }
     });
@@ -99,7 +99,7 @@ export class SLACalculator {
 
     const calculateForPriority = async (priority: 'P1' | 'P2' | 'P3'): Promise<number> => {
       const tickets = await Ticket.find({
-        teamId: new Schema.Types.ObjectId(teamId),
+        teamId: teamId,
         priority,
         status: { $in: ['resolved', 'closed'] },
         resolvedAt: { $gte: currentMonth, $lt: nextMonth }
@@ -161,14 +161,14 @@ export class SLACalculator {
    * Get at-risk tickets sorted by percentage elapsed
    */
   static async getAtRiskTickets(teamId: string): Promise<Array<ITicket & { percentageElapsed: number }>> {
-    const policy = await SLAPolicy.findOne({ teamId: new Schema.Types.ObjectId(teamId) });
+    const policy = await SLAPolicy.findOne({ teamId: teamId });
     
     if (!policy) {
       return [];
     }
 
     const openTickets = await Ticket.find({
-      teamId: new Schema.Types.ObjectId(teamId),
+      teamId: teamId,
       status: { $nin: ['resolved', 'closed'] }
     });
 
@@ -201,7 +201,7 @@ export class SLACalculator {
 
     // Fetch all tickets for current month
     const allTickets = await Ticket.find({
-      teamId: new Schema.Types.ObjectId(teamId),
+      teamId: teamId,
       createdAt: { $gte: currentMonth, $lt: nextMonth }
     });
 
@@ -236,7 +236,7 @@ export class SLACalculator {
     const mttrByPriority = await this.calculateMTTRByPriority(teamId);
 
     // Get at-risk count
-    const policy = await SLAPolicy.findOne({ teamId: new Schema.Types.ObjectId(teamId) });
+    const policy = await SLAPolicy.findOne({ teamId: teamId });
     let atRiskCount = 0;
     if (policy) {
       atRiskCount = openTickets.filter(ticket => this.isAtRisk(ticket, policy)).length;
@@ -270,7 +270,7 @@ export class SLACalculator {
       dayEnd.setDate(dayEnd.getDate() + 1);
 
       const dayTickets = await Ticket.find({
-        teamId: new Schema.Types.ObjectId(teamId),
+        teamId: teamId,
         createdAt: { $gte: dayStart, $lt: dayEnd }
       });
 

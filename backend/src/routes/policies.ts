@@ -37,7 +37,7 @@ router.get('/', async (req: AuthRequest, res: Response) => {
     }
 
     const policies = await SLAPolicy.find({
-      teamId: new Schema.Types.ObjectId(req.teamId)
+      teamId: req.teamId
     });
 
     res.json(policies);

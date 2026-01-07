@@ -52,7 +52,7 @@ router.get('/', async (req: ListTicketsRequest, res: Response) => {
     const limit = Math.min(parseInt(req.query.limit || '50'), 100);
     const skip = parseInt(req.query.skip || '0');
 
-    const query: any = { teamId: new Schema.Types.ObjectId(req.teamId) };
+    const query: any = { teamId: req.teamId };
 
     if (req.query.status) {
       query.status = req.query.status;

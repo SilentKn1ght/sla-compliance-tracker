@@ -12,6 +12,9 @@ export default function Dashboard() {
 
   // Convert at-risk tickets to alerts
   const alerts = useMemo(() => {
+    if (!atRiskTickets || !Array.isArray(atRiskTickets)) {
+      return []
+    }
     return atRiskTickets.map((ticket, index) => ({
       id: `${ticket._id}-${index}`,
       type: 'at_risk' as const,
@@ -109,7 +112,13 @@ export default function Dashboard() {
 
           <AlertPanel alerts={alerts.length > 0 ? alerts : undefined} />
         </>
-      ) : null}
+      ) : (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-8 text-center">
+          <div className="text-4xl mb-4">📊</div>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">Welcome to SLA Tracker</h2>
+          <p className="text-gray-600 mb-4">Get started by creating your first ticket above</p>
+        </div>
+      )}
     </div>
   )
 }
