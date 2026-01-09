@@ -140,6 +140,12 @@ export class AlertService {
         <p style="color: #d32f2f; font-weight: bold;">Please take immediate action to resolve this ticket.</p>
       `;
 
+      // Skip email in development
+      if (process.env.NODE_ENV === 'development' || !process.env.SMTP_HOST) {
+        console.log(`📧 [DEV] Alert for ticket ${ticket.ticketNumber} (email skipped in dev mode)`);
+        return;
+      }
+
       await EmailService.sendEmail(adminEmail, emailSubject, emailBody);
       console.log(`✅ At-risk alert sent for ticket ${ticket.ticketNumber}`);
     } catch (error) {

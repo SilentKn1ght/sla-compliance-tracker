@@ -1,5 +1,5 @@
 import { Router, Response } from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt, { SignOptions, Secret } from 'jsonwebtoken';
 import { Team } from '../models/Team';
 import { SLAPolicy } from '../models/SLAPolicy';
