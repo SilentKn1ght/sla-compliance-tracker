@@ -35,3 +35,5 @@ coverage/
 .nyc_output/
 backend/scripts/seed.js
 backend/scripts/migrate-db.js
+backend/src/config-api-tester.ts
+backend/scripts/cleanup-api-tester.js
