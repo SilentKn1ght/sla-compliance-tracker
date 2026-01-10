@@ -2,6 +2,30 @@
 
 Full-stack SLA tracking app (React + Vite + TypeScript + Tailwind, Node/Express + TypeScript + MongoDB).
 
+> **⚠️ Database Update (Jan 2026)**: This project now uses a dedicated `sla_compliance_tracker` database instead of the shared `test` database. See [Database Documentation](#-database-setup--reorganization) below.
+
+## 🔗 Database Setup & Reorganization
+
+**Important**: The MongoDB database has been reorganized to separate SLA Tracker data from the API Tester project. Please review the documentation before starting.
+
+### Quick Database Links
+- **START HERE**: [DB_IMPLEMENTATION_SUMMARY.md](./DB_IMPLEMENTATION_SUMMARY.md) - Executive summary & quick start
+- **Data Analysis**: [DATABASE_ANALYSIS_REPORT.md](./DATABASE_ANALYSIS_REPORT.md) - Detailed data review
+- **Migration Guide**: [DB_REORGANIZATION_GUIDE.md](./DB_REORGANIZATION_GUIDE.md) - Step-by-step migration
+- **Setup Instructions**: [ENVIRONMENT_SETUP.md](./ENVIRONMENT_SETUP.md) - Connection configuration
+- **Architecture**: [DATABASE_ARCHITECTURE_DIAGRAMS.md](./DATABASE_ARCHITECTURE_DIAGRAMS.md) - Visual diagrams
+- **API Tester Setup**: [API_TESTER_SETUP.md](./API_TESTER_SETUP.md) - Cleanup & database separation for API Tester
+- **Deliverables**: [DELIVERABLES_SUMMARY.md](./DELIVERABLES_SUMMARY.md) - Complete project summary
+
+**API Tester Cleanup & Setup**:
+1. `cd backend && node scripts/cleanup-api-tester.js --dry-run` (preview)
+2. `cd backend && node scripts/cleanup-api-tester.js` (execute)
+3. `cd backend && node scripts/migrate-db.js` (migrate)
+
+**See Also**: [API_TESTER_QUICK_REFERENCE.md](./API_TESTER_QUICK_REFERENCE.md) for quick start
+
+---
+
 ## Quick Start
 
 Prereqs: Node 18+, npm, MongoDB connection string.
