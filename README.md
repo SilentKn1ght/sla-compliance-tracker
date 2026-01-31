@@ -2,7 +2,6 @@
 
 Full-stack SLA tracking app (React + Vite + TypeScript + Tailwind, Node/Express + TypeScript + MongoDB).
 
-> **⚠️ Database Update (Jan 2026)**: This project now uses a dedicated `sla_compliance_tracker` database instead of the shared `test` database. See [Database Documentation](#-database-setup--reorganization) below.
 
 ## 🔗 Database Setup & Reorganization
 
